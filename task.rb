@@ -16,7 +16,7 @@ end
 
 def q2
   array = ["田中", "佐藤", "佐々木", "高橋"]
-  array.push("斎藤")
+  array << "斎藤"
   p array
 end
 
@@ -37,11 +37,9 @@ end
 # ["bird", "bat", "tiger"]
 
 def q4
-  array1 = ["dog", "cat", "fish"]
-  array2 = ["bird", "bat", "tiger"]
-  array1.push(array2)
-  array1.flatten!
-  p array1
+  array = ["田中", "佐藤", "佐々木", "高橋"]
+  array << "斎藤"
+  p array
 end
 
 
@@ -53,3 +51,203 @@ def q5
   count = array.count(3)
   p count
 end
+
+
+# Q6. 配列が空であればtrue、1つ以上の要素があればfalseを返すコードを書いてください
+# 例
+# []
+# -> true
+# [1, 5, 8, 10]
+# -> false
+
+def q6
+  array = []
+  p array.empty?
+  array = [1, 5, 8, 10]
+  p array.empty?
+end
+
+
+# Q7. 配列であればtrue、配列でなければfalseを返すコードを書いてください
+# 例
+# []
+# -> true
+# {}
+# -> false
+
+def q7
+  array = []
+  puts array.kind_of?(Array)
+  array = {}
+  puts array.kind_of?(Array)
+end
+
+
+# Q8. mapとは異なるメソッドを使って以下と全く同じ処理を実現させてください
+# numbers = ["6", "5", "3", "7", "1"]
+# p numbers.map {|item| item.to_i }
+# -> [6, 5, 3, 7, 1]
+
+def q8
+  numbers = ["6", "5", "3", "7", "1"]
+  p numbers.collect {|item| item.to_i }
+  [6, 5, 3, 7, 1]
+end
+
+
+# Q9. 以下の配列を用いて、期待通りの出力結果になるようにコードを書いてください
+# ["田中", "佐藤", "佐々木", "高橋"]
+# 期待結果
+# 会員No.1 田中さん
+# 会員No.2 佐藤さん
+# 会員No.3 佐々木さん
+# 会員No.4 高橋さん
+
+def q9
+  members = ["田中", "佐藤", "佐々木", "高橋"]
+  n = 0
+  members.each do |member|
+    n += 1
+    p "会員No.#{n} " + member + "さん"
+  end
+end
+
+
+# Q10. 以下の配列の最後に山下を追加してください
+# ["田中", "佐藤", "佐々木", "高橋"]
+
+def q10
+  array1 = ["田中", "佐藤", "佐々木", "高橋"]
+  array2 = ["山下"]
+  p array1.concat(array2)
+end
+
+
+# Q11 以下の配列から重複する部分だけを抽出した新しい配列を作成してください
+# favorite_sport = ["フットサル", "バスケット"]
+# selected_sport = ["野球", "ボルダリング", "サッカー", "フットサル"]
+
+def q11
+  favorite_sport = ["フットサル", "バスケット"]
+  selected_sport = ["野球", "ボルダリング", "サッカー", "フットサル"]
+  p favorite_sport & selected_sport
+end
+
+
+# Q12 以下の配列を用いた繰り返し処理において、「うに」が含まれていれば「好物です」と表示し、そうでなければ「まぁまぁ好きです」と表示するようにコードを書いてください
+# ["いか", "たこ", "うに", "しゃけ", "うにぎり", "うに軍艦", "うに丼"]
+
+def q12
+  foods = ["いか", "たこ", "うに", "しゃけ", "うにぎり", "うに軍艦", "うに丼"]
+  if foods.include?("うに")
+    p "好物です"
+  else
+    p "まぁまぁ好きです"
+  end
+end
+
+
+# Q13. 以下の配列から奇数だけを選んだ新しい配列を作成してください
+# [1, 2, 3, 4, 5]
+
+def q13
+  numbers = [1, 2, 3, 4, 5]
+  odd = numbers.select(&:odd?)
+  p odd
+end
+
+
+# Q14. 以下の配列からnilの要素を削除してください
+# ["サッカー", "フットサル", nil, "野球", "バスケ", nil, "バレー"]
+
+def q14
+  sports = ["サッカー", "フットサル", nil, "野球", "バスケ", nil, "バレー"]
+  p sports.compact
+end
+
+
+# Q15. 以下の配列からadminの数を数えてください
+# ["admin", "user", "user", "admin", "admin"]
+
+def q15
+  arr = ["admin", "user", "user", "admin", "admin"]
+  p arr.count("admin")
+end
+
+
+# Q16. 以下の配列をもとに期待する出力結果になるようにコードを書いてください
+# ["サッカー", "バスケ", "野球", ["フットサル", "野球"], "水泳", "ハンドボール", ["卓球", "サッカー", "ボルダリング"]]
+# 期待結果
+
+# ユーザーの趣味一覧
+# No1 サッカー
+# No2 バスケ
+# No3 野球
+# No4 フットサル
+# No5 水泳
+# No6 ハンドボール
+# No7 卓球
+# No8 ボルダリング
+
+def q16
+  sports = ["サッカー", "バスケ", "野球", ["フットサル", "野球"], "水泳", "ハンドボール", ["卓球", "サッカー", "ボルダリング"]]
+  sports.flatten!
+  sports.uniq!
+  n = 0
+  puts "ユーザーの趣味一覧"
+  sports.each do |sport|
+    n += 1
+    puts "No.#{n} " + sport
+  end
+end
+
+
+# Q17. 以下のハッシュから name の値を取り出してください
+# {name: "satou", age: 33}
+
+def q17
+  hash = {name: "satou", age: 33}
+  p hash[:name]
+end
+
+
+# Q18. 以下のハッシュから name の値を取り出して下さい
+# {user: {name: "satou", age: 33}}
+
+def q18
+  hash1 = {user: {name: "satou", age: 33}}
+  puts hash1.dig(:user, :name)
+end
+
+
+# Q19. 以下の既存で存在する user_data に対して、 update_data の内容を反映させ user_data の内容を書き換えて下さい
+# user_data = {name: "神里", age: 31, address: "埼玉"}
+# update_data = {age: 32, address: "沖縄"}
+
+def q19
+  user_data = {name: "神里", age: 31, address: "埼玉"}
+  update_data = {age: 32, address: "沖縄"}
+  last_updated_data = user_data.merge!(update_data)
+  p user_data
+end
+
+
+# Q20. 以下の全てのハッシュの name と age の値を取り出し、「私の名前は〜です年齢は〜歳です」と表示してください
+# {name: "satou", age: 22}
+# {name: "yamada", age: 12}
+# {name: "takahashi", age: 32}
+# {name: "nakamura", age: 41}
+
+def q20
+  users = [
+    {name: "satou", age: 22},
+    {name: "yamada", age: 12},
+    {name: "takahashi", age: 32},
+    {name: "nakamura", age: 41}
+  ]
+  users.each do |user|
+    puts "私の名前は#{user[:name]}です年齢は#{user[:age]}歳です"
+  end
+end
+
+
