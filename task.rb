@@ -90,8 +90,11 @@ end
 
 def q8
   numbers = ["6", "5", "3", "7", "1"]
-  p numbers.collect {|item| item.to_i }
-  [6, 5, 3, 7, 1]
+  figure_numbers = []
+  numbers.each do |num|
+    figure_numbers << num.to_i
+  end
+  p figure_numbers
 end
 
 
@@ -105,10 +108,8 @@ end
 
 def q9
   members = ["田中", "佐藤", "佐々木", "高橋"]
-  n = 0
-  members.each do |member|
-    n += 1
-    p "会員No.#{n} " + member + "さん"
+  members.each.with_index do |member, i|
+    p "会員No.#{i+1} " + member + "さん"
   end
 end
 
