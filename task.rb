@@ -37,9 +37,9 @@ end
 # ["bird", "bat", "tiger"]
 
 def q4
-  array = ["田中", "佐藤", "佐々木", "高橋"]
-  array << "斎藤"
-  p array
+  array1 = ["dog", "cat", "fish"]
+  array2 = ["bird", "bat", "tiger"]
+  p array1 + array2
 end
 
 
