@@ -8,7 +8,7 @@ class User
     @name = name
     @age = age
     @gender = gender
-    @admin = false
+    @admin = admin
   end
 
 end
@@ -51,14 +51,14 @@ class User
     @name = name
     @age = age
     @gender = gender
-    @admin = false
+    @admin = admin
   end
 
   def info
     puts "名前：#{name}"
     puts "年齢：#{age}"
     puts "性別：#{gender}"
-    puts @admin != admin ? "管理者権限：有り" : "管理者権限：無し"
+    puts true == admin ? "管理者権限：有り" : "管理者権限：無し"
   end    
 end
   
