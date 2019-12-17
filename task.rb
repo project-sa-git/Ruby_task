@@ -89,6 +89,7 @@ end
 # -> [6, 5, 3, 7, 1]
 
 def q8
+  puts " \n---------- < Q8 > ----------"
   numbers = ["6", "5", "3", "7", "1"]
   figure_numbers = []
   numbers.each do |num|
@@ -252,3 +253,112 @@ def q20
 end
 
 
+# Q21. 以下の配列から全てのキーを取り出してターミナルに出力してください
+# {name: "satou", age: 33, address: "saitama", hobby: "soccer", email: "hoge@fuga.com"}
+
+def q21
+  puts " \n---------- < Q21 > ----------"
+  user = {name: "satou", age: 33, address: "saitama", hobby: "soccer", email: "hoge@fuga.com"}
+
+  user.each_key do |key|
+    p key
+  end
+end
+
+
+# Q22. ハッシュを格納した以下の配列を使用し、期待した結果になるようにコードを書いてください
+# users = [
+# {name: "satou", age: 33, address: "saitama", hobby: "soccer", email: "hoge@fuga.com"},
+# {},
+# {name: "yamada", age: 22, address: "tokyo", hobby: "soccer", email: "hoge@fuga.com"},
+# {},
+# {name: "suzuki", age: 44, address: "yamaguchi", hobby: "baseball", email: "hoge@fuga.com"}
+# ]
+# 期待結果
+# ハッシュにデータがある場合：No〜 名前〜、年齢〜、趣味〜、メール〜
+# ハッシュがからの場合：データなし
+
+def q22
+  puts " \n---------- < Q22 > ----------"
+  users = [
+  {name: "satou", age: 33, address: "saitama", hobby: "soccer", email: "hoge@fuga.com"},
+  {},
+  {name: "yamada", age: 22, address: "tokyo", hobby: "soccer", email: "hoge@fuga.com"},
+  {},
+  {name: "suzuki", age: 44, address: "yamaguchi", hobby: "baseball", email: "hoge@fuga.com"}
+  ]
+  n = 1
+
+  users.each do |user|
+    if user.empty?
+      puts "データなし"
+    else
+      puts "No.#{n} 名前#{user[:name]}、年齢#{user[:age]}、趣味#{user[:hobby]}、メール#{user[:email]}"
+      n += 1
+    end
+  end
+end
+
+
+# Q23. 以下のハッシュをキー、バリュー含め全て配列に変換してください
+# {name: "satou", age: 33, address: "saitama", hobby: "soccer", email: "hoge@fuga.com"}
+# 変換後の配列
+# [:name, "satou", :age, 33, :address, "saitama", :hobby, "soccer", :email, "hoge@fuga.com"]
+
+def q23
+  puts " \n---------- < Q23 > ----------"
+  hash = {name: "satou", age: 33, address: "saitama", hobby: "soccer", email: "hoge@fuga.com"}
+  array = []
+  hash.each do |element|
+    array << element
+  end
+  p array.flatten
+end
+
+
+# Q24. 以下のハッシュにおいて age というキーが含まれている場合は OK 、含まれていない場合は NG が表示されるようにしてください
+# { name: "saitou", hobby: "soccer", age: 33, role: "admin" }
+# { name: "yamada", hobby: "baseball", role: "normal" }
+
+def q24
+  puts " \n---------- < Q24 > ----------"
+
+  data1 = { name: "saitou", hobby: "soccer", age: 33, role: "admin" }
+  data2 = { name: "yamada", hobby: "baseball", role: "normal" }
+
+  puts (data1.has_key?(:age) ? "OK" : "NG")
+  puts (data2.has_key?(:age) ? "OK" : "NG")
+end
+
+
+# Q25. 配列 keys の各要素を、ハッシュ user がキーとして保持するかどうかを判定するコードを書いてください
+# keys = [:age, :name, :hobby, :address]
+# user = { name: "saitou", hobby: "soccer", age: 33, role: "admin" }
+# 例（意図が伝われば文章は自由に変えていただいて大丈夫です）
+# userにはageというキーがあります
+# userにはaddressというキーがありません
+
+def q25
+  puts " \n---------- < Q25 > ----------"
+  keys = [:age, :name, :hobby, :address]
+  user = { name: "saitou", hobby: "soccer", age: 33, role: "admin" }
+
+  keys.each do |key|
+    puts user.has_key?(key) ? "userには#{key}というキーがあります" : "userには#{key}というキーがありません"
+  end
+end
+
+
+# Q26. 以下の２つのハッシュを合体させた新しいハッシュを作成してください
+# {C: "printf", COBOL: "DISPLAY", Go: "fmt.Print", Java: "System.out.println"}
+# {JavaScript: "console.log", R: "print", Ruby: "puts"}
+
+def q26
+  puts " \n---------- < Q26 > ----------"
+  hash1 = {C: "printf", COBOL: "DISPLAY", Go: "fmt.Print", Java: "System.out.println"}
+  hash2 = {JavaScript: "console.log", R: "print", Ruby: "puts"}
+  hash3 = Hash.new
+  hash3 = hash1.merge(hash2)
+
+  puts hash3
+end
