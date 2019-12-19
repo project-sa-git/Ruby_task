@@ -260,9 +260,8 @@ def q21
   puts " \n---------- < Q21 > ----------"
   user = {name: "satou", age: 33, address: "saitama", hobby: "soccer", email: "hoge@fuga.com"}
 
-  user.each_key do |key|
-    p key
-  end
+  array = user.to_h
+  p array
 end
 
 
