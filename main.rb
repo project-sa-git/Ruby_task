@@ -44,7 +44,5 @@ require './task'
 q21
 q23
 q25
-q26
 
 require './class_in_q27-'
-require './q29-32.rb'
