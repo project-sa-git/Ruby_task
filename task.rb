@@ -341,9 +341,9 @@ def q25
   puts " \n---------- < Q25 > ----------"
   keys = [:age, :name, :hobby, :address]
   user = { name: "saitou", hobby: "soccer", age: 33, role: "admin" }
-
   keys.each do |key|
-    puts user.has_key?(key) ? "userには#{key}というキーがあります" : "userには#{key}というキーがありません"
+  answer = user.key?(key) ? 'あります' : 'ありません'
+    puts "userには#{key}というキーが#{answer}"  
   end
 end
 
@@ -356,8 +356,9 @@ def q26
   puts " \n---------- < Q26 > ----------"
   hash1 = {C: "printf", COBOL: "DISPLAY", Go: "fmt.Print", Java: "System.out.println"}
   hash2 = {JavaScript: "console.log", R: "print", Ruby: "puts"}
-  hash3 = Hash.new
   hash3 = hash1.merge(hash2)
 
   puts hash3
 end
+
+
