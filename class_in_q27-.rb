@@ -42,8 +42,7 @@ user = User_27.new(name: "name", age: 00, gender: "--", admin: true)
 
 puts " \n---------- < Q28 > ----------"
 class User_28
-
-  def initialize(params)
+  def initialize(**params)
     @name = params[:name]
     @age = params[:age]
     @gender = params[:gender]
@@ -52,10 +51,12 @@ class User_28
 
   def info
     admin = @admin ? '有り' : '無し'
-    puts "名前：#{@name}"
-    puts "年齢：#{@age}"
-    puts "性別：#{@gender}"
-    puts "管理者権限：#{admin}"
+    puts <<~EOS
+    名前：#{@name}
+    年齢：#{@age}
+    性別：#{@gender}
+    管理者権限：#{admin}
+    EOS
   end
 
 end
@@ -140,8 +141,7 @@ user2 = User_30.new(name: "ゆたぼん", age: 10)
 puts user2.introduce
 
 
-
-# 以下のようなコードを書くとエラーが出たので期待する出力結果となるように修正してください
+# Q31. 以下のようなコードを書くとエラーが出たので期待する出力結果となるように修正してください
 # class Item
 #   def initialize(name)
 #     @name = name
@@ -168,7 +168,7 @@ puts book.name
 
 
 
-# 仕様を満たすコードを書いてください
+# Q32. 仕様を満たすコードを書いてください
 # 名前、年齢の情報を持った「ユーザークラス」を定義してください
 # 名前、入場料金の情報を持った「動物園クラス」を定義してください
 # 入場料金は、幼児(05歳)、子供(612歳)、成人(1364歳)、シニア(65120歳)の4パターン設定してください(金額はお任せします)
@@ -176,44 +176,47 @@ puts book.name
 
 puts " \n---------- < Q32 > ----------"
 class User_32
-  attr_reader :user_name, :user_age
+  attr_reader :name, :user_age
   def initialize(**params)
-    @user_name = params[:user_name]
+    @name = params[:name]
     @user_age = params[:user_age]
   end
 end
 
 class Zoo_32
   def initialize(**params)
-    @zoo_name = params[:zoo_name]
+    @name = params[:name]
     @fee_rank1 = params[:fee_rank1]
     @fee_rank2 = params[:fee_rank2]
     @fee_rank3 = params[:fee_rank3]
+    @fee_rank4 = params[:fee_rank4]
   end
 
-  #=> def メソッド（クラス頭小文字）
   def check_entry_fee(user_32)
-    #=> 変数 = case （クラス頭小文字.引数）
     entry_fee = case user_32.user_age
-      when 0..5 then
+      when 0..5
         @fee_rank1 
-      when 6..12 then 
+      when 6..12
         @fee_rank2 
-      when 13..64 then
+      when 13..64
         @fee_rank3
+      when 65..120
+        @fee_rank4
       else
         return puts "無効な値です"
     end
-    puts "#{user_32.user_name}さんの料金は#{entry_fee}円です。"
+    puts "#{user_32.name}さんの料金は#{entry_fee}円です。"
   end
 end
-user1 = User_32.new(user_name: 'あじー', user_age: 5)
-user2 = User_32.new(user_name: "近藤", user_age: 10)
-user3 = User_32.new(user_name: "Michael", user_age: 60)
-zoo = Zoo_32.new(zoo_name: 'にほん動物園', fee_rank1: 10, fee_rank2: 300, fee_rank3: 1000)
+user1 = User_32.new(name: 'あじー', user_age: 5)
+user2 = User_32.new(name: "近藤", user_age: 10)
+user3 = User_32.new(name: "Michael", user_age: 60)
+user4 = User_32.new(name: "仙人", user_age: 120)
+zoo = Zoo_32.new(name: 'にほん動物園', fee_rank1: 10, fee_rank2: 300, fee_rank3: 1000, fee_rank4:1500)
 zoo.check_entry_fee(user1)
 zoo.check_entry_fee(user2)
 zoo.check_entry_fee(user3)
+zoo.check_entry_fee(user4)
 
 
 # Q33.  次の指定のキー name, age, address, tell が、Hash値のキーとして過不足無く含まれているかを判定するコードを書いてください
@@ -243,17 +246,8 @@ puts " \n---------- < Q34 > ----------"
 
 programming_language = ["ruby", "php", "python", "javascript"]
 
-capital_case_programming_language = []
-programming_language.each do |cap|
-  capital_case_programming_language << cap.capitalize
-end
-p capital_case_programming_language
-
-upper_case_programming_language = []
-programming_language.each do |upp|
-  upper_case_programming_language << upp.upcase
-end
-p upper_case_programming_language
+p programming_language.map(&:capitalize)
+p programming_language.map(&:upcase)
 
 
 # Q35 2つのデータベースからユーザーネーム・学習項目・合計学習時間のデータを取得したら以下のようになりました
@@ -268,13 +262,9 @@ ary =  [["田中", "JavaScript"], 30]
 values = []
 keys = ["user_name", "learning_contents", "learning_time"]
 ary.flatten!
-ary.each do |value|
-  values << value
-end
 
-array = [keys,values].transpose
-h = Hash[*array.flatten]
-p h
+array = [keys,ary].transpose
+p array.to_h
 
 
 # Q36 2つのデータベースからユーザーネーム・学習項目・合計学習時間のデータを取得したら以下のようになりました
@@ -296,44 +286,38 @@ end
 
 b.flatten!
 
-b.each do |x|
-  values << x
-end
-
-array = [keys,values].transpose
-h = Hash[*array.flatten]
+array = [keys,b].transpose
+h = Hash[*array.flatten!]
 p h
 
 
 # Q37 2つのデータベースからユーザーネーム・学習項目・合計学習時間のデータを取得したら以下のようになりました
 
-  # {["田中", "HTML"]=>30, ["斎藤", "JavaScript"]=>50}
-  # 上記のハッシュを以下のようなハッシュの配列に変換してください
-  # [{"user_name" => "田中", "learning_contents" => "HTML", "learning_time" => 30},
-  #     {"user_name" => "斎藤", "learning_contents" => "JavaScript", "learning_time" => 50}]
+# {["田中", "HTML"]=>30, ["斎藤", "JavaScript"]=>50}
+# 上記のハッシュを以下のようなハッシュの配列に変換してください
+# [{"user_name" => "田中", "learning_contents" => "HTML", "learning_time" => 30},
+#     {"user_name" => "斎藤", "learning_contents" => "JavaScript", "learning_time" => 50}]
 
-  puts " \n---------- < Q37 > ----------"
-  start_hash = {["田中", "HTML"]=>30, ["斎藤", "JavaScript"]=>50}
-  hash_1 = []
-  keys = ["user_name", "learning_contents", "learning_time"]
-  hash_2 = []
-  end_hash = []
-  
-  start_hash.each do |key, value|
-    hash_1 << key << value
-  end
-   
-  hash_1.flatten! 
-  
-  mae_values = hash_1.slice(0..2)
-  
-  ato_values = hash_1.slice(3..5)
-  
-  array_1 = [keys, mae_values].transpose
-  
-  hash_3 = Hash[*array_1.flatten]
-  
-  array_2 = [keys, ato_values].transpose
-  hash_4 = Hash[*array_2.flatten]
-  
-  p end_hash << hash_3 << hash_4
+puts " \n---------- < Q37 > ----------"
+start_hash = {["田中", "HTML"]=>30, ["斎藤", "JavaScript"]=>50}
+hash_1 = []
+keys = ["user_name", "learning_contents", "learning_time"]
+hash_2 = []
+end_array = []
+
+start_hash.each do |key, value|
+  hash_1 << key << value
+end
+
+hash_1.flatten! 
+
+mae_values = hash_1.slice(0..2)
+ato_values = hash_1.slice(3..5)
+
+hash_2 = [keys,mae_values].transpose
+h1 = Hash[*hash_2.flatten!]
+
+hash_3 = [keys,ato_values].transpose
+h2 = Hash[*hash_3.flatten!]
+
+p end_array << h1 << h2

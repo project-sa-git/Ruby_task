@@ -260,8 +260,9 @@ def q21
   puts " \n---------- < Q21 > ----------"
   user = {name: "satou", age: 33, address: "saitama", hobby: "soccer", email: "hoge@fuga.com"}
 
-  array = user.to_h
-  p array
+  user.each_key do |key|
+    p key
+  end
 end
 
 
@@ -307,11 +308,8 @@ end
 def q23
   puts " \n---------- < Q23 > ----------"
   hash = {name: "satou", age: 33, address: "saitama", hobby: "soccer", email: "hoge@fuga.com"}
-  array = []
-  hash.each do |element|
-    array << element
-  end
-  p array.flatten
+
+  p hash.map(&:to_a).flatten
 end
 
 
